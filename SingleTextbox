@@ -1,0 +1,29 @@
+import { useState } from 'react';
+
+const SingleTextbox = () => {
+    const [inputdata, setInputData] = useState(''); 
+    const [emps, setEmp] = useState(['keerthi', 'siri']); 
+
+    const collectInput = (e) => {
+        setInputData(e.target.value); // ✅ ONLY this line
+    }
+
+    const addEmp = () => {
+        setEmp([...emps, inputdata]);
+        setInputData('');
+    }
+
+    return (
+        <div>
+            <input type="text" onChange={collectInput} value={inputdata} />
+            <input type="submit" onClick={addEmp} value="Add Employee" />
+            <ul>
+                {emps.map((element, i) => (
+                    <li key={i}>{element}</li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
+export default SingleTextbox;
