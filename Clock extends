@@ -1,0 +1,43 @@
+import React from 'react';
+
+class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log("component mounting: constructor");
+        this.state = {
+            date: new Date()
+        };
+    }
+
+    componentDidMount() {
+        console.log("component DidMount: After constructor");
+        this.timerID = setInterval(
+            () => this.setTime(), 
+            1000
+        );
+    }
+
+    componentWillUnmount() {
+        console.log("component unmounting: componentWillUnmount");
+        clearInterval(this.timerID);
+    }
+
+    setTime() {
+        this.setState((state, props) => {
+            console.log(state, props);
+            return {
+                date: new Date()
+            }
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                <p>the current time is {this.state.date.toString()}</p>
+            </div>
+        );
+    }
+}
+
+export default Clock;
